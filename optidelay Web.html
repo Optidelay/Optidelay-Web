@@ -1,0 +1,569 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OPTIDELAY | Optimización Profesional de Sistemas</title>
+<meta name="description" content="Optimizaciones avanzadas y profesionales de sistema. Más de 1500 PCs optimizados, 100% de clientes satisfechos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #FF1E27;
+    --red-dark: #990A0C;
+    --bg: #050505;
+    --bg2: #0d0d10;
+    --card: #131318;
+    --white: #ffffff;
+    --gray: #a0a0aa;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.logo,.font-display { font-family:'Orbitron', sans-serif; }
+
+  .glow {
+    position:fixed; inset:0; z-index:-2;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(255,30,39,.10), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(255,30,39,.08), transparent 45%);
+  }
+  .grid-bg {
+    position:fixed; inset:0; z-index:-1; opacity:.35;
+    background-image:
+      linear-gradient(rgba(255,30,39,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,30,39,.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .container { max-width:1150px; margin:0 auto; padding:0 24px; }
+
+  /* NAVBAR */
+  nav {
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,10,12,.75);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,30,39,.15);
+  }
+  .nav-inner { display:flex; align-items:center; justify-content:space-between; padding:14px 0; }
+  .logo { display:flex; align-items:center; gap:12px; font-weight:900; font-size:1.3rem; letter-spacing:1px; text-decoration:none; color:#fff; }
+  .logo img { height:42px; width:auto; }
+  .logo span { letter-spacing:1px; }
+  .logo .dot { color:var(--red); }
+  .nav-links { display:flex; gap:26px; align-items:center; }
+  .nav-links a { text-decoration:none; font-size:.95rem; font-weight:500; transition:.2s; color:#c9c9d2; }
+  .nav-links a:hover { color:var(--red); }
+  .btn {
+    display:inline-block; padding:11px 22px; border-radius:8px;
+    background:var(--red); color:#fff; text-decoration:none;
+    font-weight:700; font-size:.95rem; border:none; cursor:pointer;
+    transition:.2s; box-shadow:0 0 20px rgba(255,30,39,.4);
+  }
+  .btn:hover { transform:translateY(-2px); box-shadow:0 0 32px rgba(255,30,39,.6); }
+  .btn-outline { background:transparent; border:1px solid var(--red); color:var(--red); box-shadow:none; }
+  .btn-outline:hover { background:var(--red); color:#fff; }
+
+  /* HERO */
+  .hero { padding:100px 0 70px; text-align:center; position:relative; }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:8px;
+    border:1px solid rgba(255,30,39,.4); color:var(--red);
+    padding:8px 16px; border-radius:999px; font-size:.85rem; font-weight:600; margin-bottom:24px;
+    background:rgba(255,30,39,.08);
+  }
+  .hero-badge .pulse { width:8px; height:8px; border-radius:50%; background:var(--red); box-shadow:0 0 10px var(--red); animation:pulse 1.6s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.5)} }
+  .hero h1 {
+    font-size:clamp(2.2rem, 6vw, 4.2rem);
+    line-height:1.1; font-weight:900; letter-spacing:1px;
+  }
+  .hero h1 .red { color:var(--red); text-shadow:0 0 30px rgba(255,30,39,.5); }
+  .hero p.sub { max-width:680px; margin:24px auto 0; color:var(--gray); font-size:1.15rem; line-height:1.7; }
+  .hero .cta-row { margin-top:36px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+
+  /* STATS */
+  .stats { padding:40px 0; }
+  .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; text-align:center; }
+  .stat { padding:24px; background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:14px; }
+  .stat .num { font-family:'Orbitron'; font-size:2.2rem; font-weight:900; color:var(--red); }
+  .stat .label { color:var(--gray); font-size:.95rem; margin-top:6px; }
+
+  /* SECTION HEAD */
+  .section { padding:80px 0; }
+  .sec-head { text-align:center; margin-bottom:50px; }
+  .sec-head .tag { color:var(--red); text-transform:uppercase; letter-spacing:3px; font-size:.8rem; font-weight:700; }
+  .sec-head h2 { font-size:clamp(1.6rem,4vw,2.6rem); margin-top:12px; }
+  .sec-head p { color:var(--gray); max-width:650px; margin:14px auto 0; line-height:1.6; }
+
+  /* FEATURES */
+  .feat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .feat { background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:14px; padding:28px; transition:.25s; }
+  .feat:hover { transform:translateY(-6px); border-color:var(--red); box-shadow:0 10px 40px rgba(255,30,39,.15); }
+  .feat .icon { font-size:2rem; margin-bottom:16px; }
+  .feat h3 { font-size:1.15rem; margin-bottom:10px; }
+  .feat p { color:var(--gray); font-size:.95rem; line-height:1.6; }
+
+  /* PRICING */
+  .pricing { background:linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); }
+  .price-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; align-items:stretch; }
+  .price-card {
+    background:var(--card); border:1px solid rgba(255,255,255,.08);
+    border-radius:16px; padding:34px 28px; display:flex; flex-direction:column; position:relative;
+    transition:.25s;
+  }
+  .price-card:hover { transform:translateY(-8px); }
+  .price-card.featured {
+    border:2px solid var(--red); box-shadow:0 0 40px rgba(255,30,39,.25);
+    transform:scale(1.03);
+  }
+  .price-card.featured:hover { transform:scale(1.03) translateY(-8px); }
+  .price-flag {
+    position:absolute; top:-14px; left:50%; transform:translateX(-50%);
+    background:var(--red); color:#fff; font-size:.75rem; font-weight:700;
+    padding:6px 16px; border-radius:999px; letter-spacing:1px;
+  }
+  .price-name { font-family:'Orbitron'; font-weight:700; font-size:1.2rem; letter-spacing:1px; }
+  .price-desc { color:var(--gray); font-size:.88rem; margin:8px 0 20px; }
+  .price-amount { font-family:'Orbitron'; font-weight:900; font-size:2.4rem; color:var(--red); }
+  .price-ars { color:var(--gray); font-size:.9rem; margin-top:4px; }
+  .price-feats { list-style:none; margin:22px 0; flex:1; }
+  .price-feats li { padding:9px 0; border-bottom:1px solid rgba(255,255,255,.06); display:flex; gap:10px; font-size:.92rem; color:#d6d6dd; }
+  .price-feats li::before { content:"✓"; color:var(--red); font-weight:700; }
+  .price-card .btn { text-align:center; margin-top:10px; }
+
+  /* BENCHMARK RESULTS */
+  .bench-wrap { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+  .bench-img { border-radius:16px; overflow:hidden; border:1px solid rgba(255,30,39,.25); box-shadow:0 0 40px rgba(255,30,39,.12); }
+  .bench-img img { width:100%; display:block; }
+  .bench-bars { display:flex; flex-direction:column; gap:18px; }
+  .bench-bar .b-top { display:flex; justify-content:space-between; font-size:.95rem; margin-bottom:6px; }
+  .bench-bar .b-top b { color:#fff; }
+  .bench-bar .b-track { height:12px; background:#22222a; border-radius:6px; overflow:hidden; }
+  .bench-bar .b-fill { height:100%; background:linear-gradient(90deg,var(--red-dark),var(--red)); border-radius:6px; }
+  .bench-bar .b-pct { color:var(--red); font-weight:800; font-size:.9rem; }
+
+  /* FEEDBACK GALLERY */
+  .fb-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .fb-card { background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:14px; padding:26px; transition:.25s; }
+  .fb-card:hover { transform:translateY(-6px); border-color:var(--red); }
+  .fb-card .fb-head { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+  .fb-card .fb-avatar { width:38px; height:38px; border-radius:50%; background:var(--red); display:flex; align-items:center; justify-content:center; font-weight:800; font-family:'Orbitron'; font-size:.9rem; }
+  .fb-card .fb-name { font-weight:700; font-size:.95rem; }
+  .fb-card .fb-stars { color:var(--red); letter-spacing:2px; font-size:.8rem; }
+  .fb-card .fb-msg { color:#d6d6dd; font-size:.93rem; line-height:1.6; font-style:italic; }
+  .fb-card .fb-img { margin-top:14px; border-radius:10px; overflow:hidden; border:1px solid rgba(255,255,255,.08); }
+  .fb-card .fb-img img { width:100%; display:block; cursor:pointer; }
+  .fb-more { text-align:center; margin-top:36px; }
+  .fb-more p { color:var(--gray); margin-bottom:16px; }
+
+  /* LIGHTBOX */
+  .lightbox { position:fixed; inset:0; background:rgba(0,0,0,.92); z-index:100; display:none; align-items:center; justify-content:center; cursor:pointer; }
+  .lightbox img { max-width:90vw; max-height:90vh; border-radius:10px; }
+  .lightbox.open { display:flex; }
+
+  /* DISCORD */
+  .discord-section { text-align:center; padding:70px 0; background:var(--bg2); border-top:1px solid rgba(255,30,39,.15); border-bottom:1px solid rgba(255,30,39,.15); }
+  .discord-section h2 { font-size:clamp(1.6rem,4vw,2.4rem); }
+  .discord-section p { max-width:700px; margin:16px auto 30px; color:var(--gray); line-height:1.7; }
+  .discord-box {
+    display:inline-flex; align-items:center; gap:16px; flex-wrap:wrap; justify-content:center;
+    background:var(--card); border:1px solid rgba(255,30,39,.35); padding:20px 34px; border-radius:14px; text-decoration:none;
+  }
+  .discord-box .d-icon { font-size:2.2rem; color:#5865F2; }
+  .discord-box .d-text { text-align:left; color:#fff; }
+  .discord-box .d-text b { font-size:1.15rem; }
+  .discord-box .d-text span { color:var(--gray); font-size:.85rem; }
+  .discord-box .btn { margin-left:10px; }
+
+  /* FAQ */
+  .faq-wrap { max-width:760px; margin:0 auto; }
+  .faq-item { background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:12px; margin-bottom:14px; overflow:hidden; }
+  .faq-q { padding:20px 24px; display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-weight:600; font-size:1.02rem; }
+  .faq-q .arrow { transition:.3s; color:var(--red); }
+  .faq-item.open .faq-q .arrow { transform:rotate(45deg); }
+  .faq-a { max-height:0; overflow:hidden; transition:max-height .4s ease; }
+  .faq-item.open .faq-a { max-height:400px; }
+  .faq-a p { padding:0 24px 22px; color:var(--gray); line-height:1.7; font-size:.95rem; }
+
+  /* SOCIALS */
+  .social-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; text-align:center; }
+  .social-card { background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:26px 14px; transition:.25s; text-decoration:none; color:#fff; }
+  .social-card:hover { transform:translateY(-6px); border-color:var(--red); }
+  .social-card .s-icon { font-size:2rem; margin-bottom:12px; }
+  .social-card b { display:block; font-size:.95rem; }
+  .social-card span { color:var(--gray); font-size:.8rem; }
+
+  /* OFFER */
+  .offer { text-align:center; padding:60px 0; }
+  .offer .offer-box { display:inline-block; background:var(--card); border:2px solid var(--red); padding:28px 40px; border-radius:16px; box-shadow:0 0 40px rgba(255,30,39,.2); }
+  .offer h3 { font-size:1.4rem; margin-bottom:6px; }
+  .offer p { color:var(--gray); }
+
+  /* CTA FINAL */
+  .cta-final { text-align:center; padding:80px 0; }
+  .cta-final h2 { font-size:clamp(1.6rem,4vw,2.6rem); }
+  .cta-final p { color:var(--gray); margin:16px 0 30px; font-size:1.05rem; }
+
+  footer { border-top:1px solid rgba(255,255,255,.08); padding:30px 0; text-align:center; color:var(--gray); font-size:.85rem; }
+  footer b { color:#fff; }
+  footer .fdot { color:var(--red); }
+
+  @media(max-width:900px){
+    .stats-grid{grid-template-columns:repeat(2,1fr)}
+    .feat-grid,.price-grid,.testi-grid{grid-template-columns:1fr}
+    .social-grid{grid-template-columns:repeat(2,1fr)}
+    .nav-links{display:none}
+    .price-card.featured{transform:none}
+    .price-card.featured:hover{transform:translateY(-8px)}
+    .bench-wrap{grid-template-columns:1fr}
+    .fb-grid{grid-template-columns:1fr}
+  }
+  @media(max-width:480px){
+    .stats-grid,.social-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="glow"></div>
+<div class="grid-bg"></div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="container nav-inner">
+    <a class="logo" href="#">
+      <img src="logo.png" alt="OPTIDELAY logo">
+      <span>OPTIDELAY<span class="dot">.</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#precios">Precios</a>
+      <a href="#benchmarks">Resultados</a>
+      <a href="#faq">FAQ</a>
+      <a href="#discord">Discord</a>
+      <a class="btn" href="#discord">Empezar ahora</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero container">
+  <div class="hero-badge"><span class="pulse"></span> +1500 PCs optimizados</div>
+  <h1>OPTIMIZACIÓN <span class="red">AVANZADA</span><br>DE SISTEMAS PRO</h1>
+  <p class="sub">Llevamos tu PC al máximo rendimiento con optimizaciones profesionales y avanzadas. Rendimiento real, benchmarks verificados y 100% de clientes satisfechos.</p>
+  <div class="cta-row">
+    <a href="#precios" class="btn">Ver precios</a>
+    <a href="#discord" class="btn btn-outline">Únete a Discord</a>
+  </div>
+</header>
+
+<!-- STATS -->
+<section class="stats container">
+  <div class="stats-grid">
+    <div class="stat"><div class="num">1500+</div><div class="label">PCs Optimizados</div></div>
+    <div class="stat"><div class="num">100%</div><div class="label">Clientes Satisfechos</div></div>
+    <div class="stat"><div class="num">24/7</div><div class="label">Soporte & Atención</div></div>
+    <div class="stat"><div class="num">30-60%</div><div class="label">Mejora FPS Promedio</div></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section container" id="servicios">
+  <div class="sec-head">
+    <div class="tag">Servicios</div>
+    <h2>Optimización al máximo nivel</h2>
+    <p>Configuraciones profesionales, transparencia total y resultados medibles en tiempo real.</p>
+  </div>
+  <div class="feat-grid">
+    <div class="feat">
+      <div class="icon">⚡</div>
+      <h3>Rendimiento real</h3>
+      <p>Ajustamos sistema, drivers y configuración para exprimir cada FPS y reducir la latencia al mínimo.</p>
+    </div>
+    <div class="feat">
+      <div class="icon">🎮</div>
+      <h3>Enfoque gaming</h3>
+      <p>Orientado a jugadores y creadores: máxima fluidez, estabilidad y respuesta en cada partida.</p>
+    </div>
+    <div class="feat">
+      <div class="icon">📊</div>
+      <h3>Benchmarks verificados</h3>
+      <p>Cada optimización va acompañada de benchmarks oficiales para que veas la mejora real de tu equipo.</p>
+    </div>
+    <div class="feat">
+      <div class="icon">🛡️</div>
+      <h3>Seguridad garantizada</h3>
+      <p>No perdés archivos, juegos ni programas. Proceso seguro, transparente y sin riesgos.</p>
+    </div>
+    <div class="feat">
+      <div class="icon">🖥️</div>
+      <h3>Conexión en vivo</h3>
+      <p>Trabajamos por AnyDesk/Rustdesk con cifrado de extremo a extremo y ves todo en tu pantalla en tiempo real.</p>
+    </div>
+    <div class="feat">
+      <div class="icon">💬</div>
+      <h3>Soporte directo</h3>
+      <p>Atención personalizada a través de Discord, WhatsApp y redes sociales en todo momento.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section pricing" id="precios">
+  <div class="container">
+    <div class="sec-head">
+      <div class="tag">Precios</div>
+      <h2>Elegí tu plan de optimización</h2>
+      <p>Precios claros, sin sorpresas. Elegí el plan que mejor se adapte a tu equipo.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="price-name">BÁSICA</div>
+        <div class="price-desc">Ideal para empezar y notar la mejora.</div>
+        <div class="price-amount">$5</div>
+        <div class="price-ars">USD · $7.500 ARS</div>
+        <ul class="price-feats">
+          <li>Optimización básica de sistema</li>
+          <li>Ajustes de rendimiento general</li>
+          <li>Sesión de 30-45 minutos</li>
+          <li>Soporte por Discord</li>
+        </ul>
+        <a class="btn btn-outline" href="#discord">Elegir plan</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-flag">MÁS ELEGIDO</div>
+        <div class="price-name">AVANZADA</div>
+        <div class="price-desc">El equilibrio perfecto entre precio y rendimiento.</div>
+        <div class="price-amount">$10</div>
+        <div class="price-ars">USD · $15.000 ARS</div>
+        <ul class="price-feats">
+          <li>Optimización avanzada completa</li>
+          <li>Optimización de juegos específicos</li>
+          <li>Ajustes de rendimiento gaming</li>
+          <li>Benchmark de verificación</li>
+          <li>Prioridad en soporte</li>
+        </ul>
+        <a class="btn" href="#discord">Elegir plan</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-name">AVANZADA +</div>
+        <div class="price-desc">Máximo rendimiento, optimización total PRO.</div>
+        <div class="price-amount">$20</div>
+        <div class="price-ars">USD · $30.000 ARS</div>
+        <ul class="price-feats">
+          <li>Optimización total del sistema</li>
+          <li>Optimización completa con BIOS</li>
+          <li>Benchmarks avanzados y detallados</li>
+          <li>Configuración personalizada a medida</li>
+          <li>Soporte prioritario 24/7</li>
+        </ul>
+        <a class="btn" href="#discord">Elegir plan</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENCHMARK RESULTS -->
+<section class="section container" id="benchmarks">
+  <div class="sec-head">
+    <div class="tag">Resultados medibles</div>
+    <h2>Benchmarks oficiales</h2>
+    <p>Estos son los resultados promedio de nuestros clientes después de la optimización.</p>
+  </div>
+  <div class="bench-wrap">
+    <div class="bench-img">
+      <img src="bench1.png" alt="Benchmark resultados antes y después">
+    </div>
+    <div class="bench-bars">
+      <div class="bench-bar">
+        <div class="b-top"><b>FPS Promedio</b><span class="b-pct">+67%</span></div>
+        <div class="b-track"><div class="b-fill" style="width:100%"></div></div>
+      </div>
+      <div class="bench-bar">
+        <div class="b-top"><b>Input Lag (menos = mejor)</b><span class="b-pct">-68%</span></div>
+        <div class="b-track"><div class="b-fill" style="width:32%"></div></div>
+      </div>
+      <div class="bench-bar">
+        <div class="b-top"><b>Tiempo de Carga</b><span class="b-pct">-60%</span></div>
+        <div class="b-track"><div class="b-fill" style="width:40%"></div></div>
+      </div>
+      <div class="bench-bar">
+        <div class="b-top"><b>Uso de CPU</b><span class="b-pct">-46%</span></div>
+        <div class="b-track"><div class="b-fill" style="width:54%"></div></div>
+      </div>
+      <div class="bench-bar">
+        <div class="b-top"><b>Uso de RAM</b><span class="b-pct">-33%</span></div>
+        <div class="b-track"><div class="b-fill" style="width:67%"></div></div>
+      </div>
+      <div class="bench-bar">
+        <div class="b-top"><b>Temperaturas</b><span class="b-pct">-21%</span></div>
+        <div class="b-track"><div class="b-fill" style="width:79%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEEDBACK -->
+<section class="section container" id="feedbacks">
+  <div class="sec-head">
+    <div class="tag">Feedback real</div>
+    <h2>Lo que dicen nuestros clientes</h2>
+    <p>Feedbacks y capturas reales de nuestra comunidad en Discord. Tocá las imágenes para verlas en grande.</p>
+  </div>
+  <div class="fb-grid">
+    <div class="fb-card"><div class="fb-head"><div class="fb-avatar">A</div><div><div class="fb-name">Alonso Yets</div><div class="fb-stars">★★★★★</div></div></div><p class="fb-msg">"Recien compre la Full Avanzed Tweak me paso de 240 fps con bajones de 180 a 360 clavados!!"</p><div class="fb-img"><img src="alonso.png" data-fb="alonso.png" alt="Feedback de Alonso Yets"></div></div>
+    <div class="fb-card"><div class="fb-head"><div class="fb-avatar">F</div><div><div class="fb-name">Facu</div><div class="fb-stars">★★★★★</div></div></div><p class="fb-msg">"10/10 estaba en 240 estables y me pase a 420 con 0 delay"</p><div class="fb-img"><img src="facu.png" data-fb="facu.png" alt="Feedback de Facu"></div></div>
+    <div class="fb-card"><div class="fb-head"><div class="fb-avatar">B</div><div><div class="fb-name">Benchmark</div><div class="fb-stars">★★★★★</div></div></div><p class="fb-msg">"Resultados de rendimiento y FPS registrados después de la optimización."</p><div class="fb-img"><img src="bench1.png" data-fb="bench1.png" alt="Benchmark de resultados"></div></div>
+  </div>
+  <div class="fb-more">
+    <p>+ más de 1500 feedbacks y benchmarks en nuestra comunidad</p>
+    <a href="#discord" class="btn btn-outline">Ver feedbacks en Discord</a>
+  </div>
+</section>
+
+<!-- DISCORD -->
+<section class="discord-section" id="discord">
+  <div class="container">
+    <div class="tag" style="color:var(--red);text-transform:uppercase;letter-spacing:3px;font-size:.8rem;font-weight:700;">Comunidad</div>
+    <h2>Únete a nuestro Discord</h2>
+    <p>En nuestro servidor encontrarás los <b>feedback y benchmarks oficiales</b> de todos nuestros usuarios. Mirá resultados reales, comprobá la calidad y sumate a la comunidad.</p>
+    <a class="discord-box" href="https://discord.gg/yNqXh889Wr" target="_blank" rel="noopener">
+      <div class="d-icon">🤖</div>
+      <div class="d-text">
+        <b>discord.gg/yNqXh889Wr</b><br>
+        <span>Feedback y benchmarks oficiales de usuarios</span>
+      </div>
+      <span class="btn">Unirme</span>
+    </a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section container" id="faq">
+  <div class="sec-head">
+    <div class="tag">Preguntas frecuentes</div>
+    <h2>¿Tenés dudas? Te las respondemos</h2>
+  </div>
+  <div class="faq-wrap">
+    <div class="faq-item open">
+      <div class="faq-q">¿Pierdo archivos?<span class="caret">+</span></div>
+      <div class="faq-a"><p>No. En ningún momento se eliminan archivos personales, juegos, ni programas. La optimización se enfoca únicamente en configuraciones del sistema, servicios de Windows y ajustes de rendimiento. Tus datos están completamente seguros.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">¿Es seguro?<span class="caret">+</span></div>
+      <div class="faq-a"><p>Totalmente. Utilizamos AnyDesk/Rustdesk (Recomendado) para la conexión remota, que es una herramienta profesional con cifrado de extremo a extremo. Además, podés ver todo lo que hacemos en tu pantalla en tiempo real. Trabajamos de forma transparente.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">¿Cuánto dura la sesión?<span class="caret">+</span></div>
+      <div class="faq-a"><p>Depende del servicio contratado. Una optimización básica dura entre 30 y 45 minutos. Las optimizaciones de juegos específicos toman alrededor de 45 minutos. La optimización completa con BIOS puede tomar entre 1 y 2 horas.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">¿Realmente aumenta los FPS?<span class="caret">+</span></div>
+      <div class="faq-a"><p>Sí, de forma comprobada. Nuestros clientes reportan mejoras promedio de 30-60% en FPS, dependiendo del estado inicial de la PC. Los cambios son inmediatos y podés verificarlos en el momento con benchmarks.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">¿Necesito reinstalar Windows?<span class="caret">+</span></div>
+      <div class="faq-a"><p>No. No reinstalamos Windows. Optimizamos tu instalación actual sin perder nada. En casos muy específicos podemos recomendarlo, pero nunca es obligatorio y siempre es tu decisión.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">¿Funciona con laptops?<span class="caret">+</span></div>
+      <div class="faq-a"><p>Sí, optimizamos tanto PCs de escritorio como laptops. Las laptops suelen tener configuraciones de energía y térmicas más restrictivas, por lo que la mejora puede ser aún más notable después de nuestros ajustes.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMO -->
+<section class="promo container" id="promo">
+  <div class="offer">
+    <h3>🎁 PROMO ESPECIAL</h3>
+    <p><b>View</b> = <b style="color:var(--red)">10% de descuento</b></p>
+    <p style="margin-top:18px"><a class="btn" href="https://guns.lol/deleteduser01" target="_blank" rel="noopener">🎮 Acceder a Guns LOL</a></p>
+  </div>
+</section>
+
+<!-- SOCIALS -->
+<section class="section container" id="redes">
+  <div class="sec-head">
+    <div class="tag">Redes</div>
+    <h2>Seguinos en todas las plataformas</h2>
+  </div>
+  <div class="social-grid">
+    <a class="social-card" href="https://x.com/Optidelay" target="_blank" rel="noopener">
+      <div class="s-icon">✖️</div>
+      <b>X / Twitter</b>
+      <span>@Optidelay</span>
+    </a>
+    <a class="social-card" href="https://www.instagram.com/optidelay" target="_blank" rel="noopener">
+      <div class="s-icon">📸</div>
+      <b>Instagram</b>
+      <span>@optidelay</span>
+    </a>
+    <a class="social-card" href="https://www.youtube.com/@optidelay_boostfps" target="_blank" rel="noopener">
+      <div class="s-icon">▶️</div>
+      <b>YouTube</b>
+      <span>@optidelay_boostfps</span>
+    </a>
+    <a class="social-card" href="https://discord.gg/yNqXh889Wr" target="_blank" rel="noopener">
+      <div class="s-icon">🤖</div>
+      <b>Discord</b>
+      <span>Comunidad oficial</span>
+    </a>
+    <a class="social-card" href="#" target="_blank" rel="noopener">
+      <div class="s-icon">🎵</div>
+      <b>TikTok</b>
+      <span>@optidelay</span>
+    </a>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final container">
+  <h2>¿Listo para exprimir tu PC?</h2>
+  <p>Unite al Discord, mirá los benchmarks oficiales y elegí tu plan. Más de 1500 PCs ya fueron optimizados.</p>
+  <a href="#discord" class="btn" style="font-size:1.1rem;padding:16px 40px">Empezar ahora</a>
+</section>
+
+<footer>
+  <div class="container">
+    <b>OPTIDELAY<span class="fdot">.</span></b> — Optimización Profesional de Sistemas · Más de 1500 PCs · 100% clientes satisfechos<br>
+    © <span id="year"></span> Optidelay. Todos los derechos reservados.
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox"><img id="lightbox-img" alt=""></div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // FAQ toggle
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      q.parentElement.classList.toggle('open');
+    });
+  });
+
+  // Lightbox for feedback images
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  document.querySelectorAll('.fb-img img').forEach(img => {
+    img.addEventListener('click', (e) => {
+      e.stopPropagation();
+      lightboxImg.src = img.getAttribute('data-fb');
+      lightbox.classList.add('open');
+    });
+  });
+  lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
+</script>
+</body>
+</html>
+</crepooArtifact>
